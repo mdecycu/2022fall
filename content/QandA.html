@@ -2,7 +2,7 @@
         <head>
         <title>2022fall</title>
         <meta charset="utf-8">
-<meta property="head" content="H2">
+<meta property="head" content="H3">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -141,8 +141,40 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">NX << <a href='NX.html'>Previous</a> <a href='CoppeliaSim.html'>Next</a> >> CoppeliaSim<br /><h1>Onshape</h1>
-<br />NX << <a href='NX.html'>Previous</a> <a href='CoppeliaSim.html'>Next</a> >> CoppeliaSim</div>
+    <div id="tipue_search_content">Classroom << <a href='Classroom.html'>Previous</a> <a href='repo.html'>Next</a> >> repo<br /><h1>QandA</h1>
+<h4>使用 Github 免費帳號, 有單一檔案容量大小的限制, 若在近端改版時帶有無法 push 至 Github 倉儲的大容量檔案, 該如何處理?</h4>
+<div>
+<div>Github 有關改版檔案大小限制的說明:</div>
+<div></div>
+<div style="padding-left: 30px;"><a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github">About large files on GitHub - GitHub Docs</a></div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">GitHub limits the size of files you can track in regular Git repositories.</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">If you attempt to add or update a file that is larger than 50 MB, you will receive a warning from Git. The changes will still successfully push to your repository, but you can consider removing the commit to minimize performance impact.</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">改版提交單一檔案容量大小限制為 50 MB. 但是若提交單一檔案 50 MB 時, 將會影響工作效率.</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">Github 針對<span style="color: #ff0000;">已經新增提交</span>單一檔案超過 50 MB 的處理<a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#removing-files-from-a-repositorys-history">如下</a>:</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 60px;">在命令列執行指令, 刪除超過容量的大檔案, 若檔案名稱為 big_file.mp4</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 90px;">git rm --cached big_file.mp4</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 60px;">接著執行下列指令進行訂正 (amend):</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 90px;">git commit --amend -CHEAD</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 60px;">然後再將訂正後的版本推送到 Github:</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 90px;">git push</div>
+<div style="padding-left: 30px;"></div>
+<div>其他可行的處理方式, 請參考 <a href="https://mde.tw/demo/content/Windows.html" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://mde.tw/demo/content/windows.html">https://mde.tw/demo/content/Windows.html</a> , 看看你是哪種情況:</div>
+<ol>
+<li>近端改版尚未提交, 僅對某些檔案進行變更, 但希望刪除這些變更: git checkout . (表示將近端檔案與遠端保持同步).</li>
+<li>近端改版已經提交但尚未推送, 希望刪除這些變更: git reset --soft HEAD~, 或者再加上希望刪除的前幾次變更數字.</li>
+<li>近端改版已經推送, 但希望刪除這些提交推送的改版內容: git revert 版次號 --no-edit</li>
+</ol>
+</div><br />Classroom << <a href='Classroom.html'>Previous</a> <a href='repo.html'>Next</a> >> repo</div>
         
     <!-- footer -->
       <div class="container">

@@ -13,6 +13,8 @@
 <p>ssh (sftp):</p>
 <p style="padding-left: 30px;">在 Windows 操作系統下的 ssh 網路協定, 可以利用 putty 進行設定, 並以 session 名稱代表 putty 中與 proxy 及 Auth (認證) 有關的設定. putty 中的 puttygen.exe 可以建立 OpenSSH 格式的 public key, 以及 putty 格式的 private key. 為了在近端連線到 Github, OpenSSH 格式的 public key 必須送到 Github 帳號下 Settings 的 SSH and GPG keys 區. 而 putty 中有關 session 的設定則會被存入以下登錄區:</p>
 <p style="padding-left: 60px;">電腦\HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY</p>
+<p style="padding-left: 30px;">另外, 在 Windows 操作系統希望採用 putty 設定 git 連線用的 ssh, 必須在啟動可攜系統時, 宣告:</p>
+<p style="padding-left: 60px;">set GIT_SSH=%cd%\putty\plink.exe</p>
 <p style="padding-left: 30px;">在 Linux 操作系統下的 ssh 網路協定, 可以利用 ssh-keygen 建立, 內定的 keys 將會存入使用者工作目錄下的 .ssh 目錄, 且以 id_rsa 與 id_rsa.pub 代表其 private key 與 public key. 至於 Linux 環境下的 ssh proxy 設定, 則位於 .ssh/config 檔案中, config 的設定格式為:</p>
 <p style="padding-left: 60px;">Host demo</p>
 <p style="padding-left: 60px;">User git</p>
@@ -29,10 +31,42 @@
 <p><span>flask flask_cors bs4 lxml pelican markdown pyopenssl</span></p>
 <p><span>而在近端為了管理 cmsimde 中的網際簡報與網誌, 通常建議再加裝 leo 模組, 因此希望執行 cmsimde 動態網站的 Python 環境, 需要以 pip 安裝所需模組:</span></p>
 <p style="padding-left: 30px;"><span><span style="color: #ff0000;">pip install flask flask_cors bs4 lxml pelican markdown leo pyopenssl</span> </span></p><h1>Git</h1>
-<h2>Github</h2>
+<p>Git 是在 2005 年為了有效管理 Linux 操作系統的原始碼而建立. 具有分散式版次管理的特性, 在多人協同開發程式碼的過程, 可以清楚看出各程式段由誰貢獻, 且其分支架構可以讓使用者切出不會影響主分支的版本進行改版, 一旦主分支之外的版本完成後, 可以選擇將改版功能合併至主分支或保留紀錄.</p><h2>Github</h2>
 <h3>Pages</h3>
-<h3>Classroom</h3><h2>repo</h2>
-<h3>localhost</h3>
+<h3>Classroom</h3><h3>QandA</h3>
+<h4>使用 Github 免費帳號, 有單一檔案容量大小的限制, 若在近端改版時帶有無法 push 至 Github 倉儲的大容量檔案, 該如何處理?</h4>
+<div>
+<div>Github 有關改版檔案大小限制的說明:</div>
+<div></div>
+<div style="padding-left: 30px;"><a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github">About large files on GitHub - GitHub Docs</a></div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">GitHub limits the size of files you can track in regular Git repositories.</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">If you attempt to add or update a file that is larger than 50 MB, you will receive a warning from Git. The changes will still successfully push to your repository, but you can consider removing the commit to minimize performance impact.</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">改版提交單一檔案容量大小限制為 50 MB. 但是若提交單一檔案 50 MB 時, 將會影響工作效率.</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 30px;">Github 針對<span style="color: #ff0000;">已經新增提交</span>單一檔案超過 50 MB 的處理<a href="https://docs.github.com/en/repositories/working-with-files/managing-large-files/about-large-files-on-github#removing-files-from-a-repositorys-history">如下</a>:</div>
+<div style="padding-left: 30px;"></div>
+<div style="padding-left: 60px;">在命令列執行指令, 刪除超過容量的大檔案, 若檔案名稱為 big_file.mp4</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 90px;">git rm --cached big_file.mp4</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 60px;">接著執行下列指令進行訂正 (amend):</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 90px;">git commit --amend -CHEAD</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 60px;">然後再將訂正後的版本推送到 Github:</div>
+<div style="padding-left: 60px;"></div>
+<div style="padding-left: 90px;">git push</div>
+<div style="padding-left: 30px;"></div>
+<div>其他可行的處理方式, 請參考 <a href="https://mde.tw/demo/content/Windows.html" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://mde.tw/demo/content/windows.html">https://mde.tw/demo/content/Windows.html</a> , 看看你是哪種情況:</div>
+<ol>
+<li>近端改版尚未提交, 僅對某些檔案進行變更, 但希望刪除這些變更: git checkout . (表示將近端檔案與遠端保持同步).</li>
+<li>近端改版已經提交但尚未推送, 希望刪除這些變更: git reset --soft HEAD~, 或者再加上希望刪除的前幾次變更數字.</li>
+<li>近端改版已經推送, 但希望刪除這些提交推送的改版內容: git revert 版次號 --no-edit</li>
+</ol>
+</div><h2>repo</h2><h3>localhost</h3>
 <h3>Replit</h3>
 <h3>Stud</h3>
 <h1>Python</h1>
@@ -324,7 +358,15 @@ doc["aitetris"].bind("click", aitetris.do)
 <h1>CoppeliaSim</h1>
 <h1>Examples</h1>
 <h2>cp2022</h2>
-<h3>w17</h3>
+<p>為何學習計算機程式需要建立個人倉儲?</p>
+<p style="padding-left: 30px;">從 <a href="https://survey.stackoverflow.co/2022/#overview">Stack Overflow Developer Survey 2022</a> 可得知, 專業的程式開發者將 Git 視為最基本的工具. 而 Git 工具的使用與個人在 Github 的倉儲相結合, 可以有效採分散式的方式管理個人或團隊所開發的程式碼. </p>
+<p style="padding-left: 30px;">因此在學習計算機程式時, 若能同時熟悉位於 Github 中個人倉儲的維護, 將可在隨後的應用中採取與專業人士相容的處理流程與模式.</p>
+<p>全球資訊網能夠提供甚麼功能或有什麼優點?</p>
+<p>Replit, stud.cycu.org 與 localhost 分別代表甚麼?</p>
+<p>https, ssh 到底提供使用者那些功能或優點?</p>
+<p>Brython 與 Python 有甚麼差別?</p>
+<p>能夠直接在瀏覽器中以 Brython 繪製中華民國國旗, 或模擬綠色方塊在方塊格點中任意移動, 代表甚麼?</p>
+<p>變數, 字串, 整數, 浮點數, 數列, Tuple, Dictionary, 函式, 重複迴圈, class, 物件導向, 資料庫, 這些名詞對您而言代表甚麼?</p><h3>w17</h3>
 <p></p>
 <p>函式定義與呼叫</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">def length(inch):
