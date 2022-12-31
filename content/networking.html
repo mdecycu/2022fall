@@ -2,6 +2,7 @@
         <head>
         <title>2022fall</title>
         <meta charset="utf-8">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -140,13 +141,20 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content"> <a href='networking.html'>Next</a> >> networking<br /><h1>About</h1>
-<p>網站: <a href="https://mde.tw/2022fall">https://mde.tw/2022fall</a> </p>
-<p>倉儲: <a href="https://github.com/mdecycu/2022fall">https://github.com/mdecycu/2022fall</a> </p>
-<p>本網站主要統整 2022 Fall <a href="https://mde.tw/content/cp2022">計算機程式</a>以及<a href="https://mde.tw/content/cad2022">電腦輔助設計與實習</a>課程的相關內容、議題與對策.</p>
-<p>相關課程:</p>
-<p style="padding-left: 30px;">網際內容管理 <a href="https://mde.tw/wcm2023">https://mde.tw/wcm2023</a> </p>
-<p style="padding-left: 30px;">協同產品設計實習 <a href="https://mde.tw/cd2023">https://mde.tw/cd2023</a> </p><br /> <a href='networking.html'>Next</a> >> networking</div>
+    <div id="tipue_search_content">About << <a href='About.html'>Previous</a> <a href='cmsimde.html'>Next</a> >> cmsimde<br /><h1>networking</h1>
+<p>IPv4 與 IPv6 是兩種不同架構的網路協定, 由於 IPv4 網路協定已經不敷目前網路應用所需, 因此衍生出 IPv6 網路協定. 但由於 IPv4 網路協定已經使用超過 40 年, 因此仍會存在很長一段時間. 在可見的未來, IPv4 與 IPv6 網路協定將會同時存在.</p>
+<p>在 Windows 操作系統可在命令列以 ipconfig /all 取的與 internet protocol configuration 有關的資訊.</p>
+<p>若電腦環境只提供 IPv4 網路協定, 但需要透過特定網路協定 (包括 http(s), ssh, sftp 等協定) 與只支援 IPv6 網路協定的網站進行資料交換, 就必須設定能夠提供雙網路 (IPv4 與 IPv6) 協定的代理主機 (Proxy server).</p>
+<p>http(s):</p>
+<p style="padding-left: 30px;">在 Windows 操作系統下, Edge 與 Chrome 只能使用操作系統設定的代理主機, 而 Firefox 與 Waterfox 則可以使用操作系統的代理主機設定, 或者自行設定連線的代理主機.</p>
+<p>ssh (sftp):</p>
+<p style="padding-left: 30px;">在 Windows 操作系統下的 ssh 網路協定, 可以利用 putty 進行設定, 並以 session 名稱代表 putty 中與 proxy 及 Auth (認證) 有關的設定. putty 中的 puttygen.exe 可以建立 OpenSSH 格式的 public key, 以及 putty 格式的 private key. 為了在近端連線到 Github, OpenSSH 格式的 public key 必須送到 Github 帳號下 Settings 的 SSH and GPG keys 區. 而 putty 中有關 session 的設定則會被存入以下登錄區:</p>
+<p style="padding-left: 60px;">電腦\HKEY_CURRENT_USER\SOFTWARE\SimonTatham\PuTTY</p>
+<p style="padding-left: 30px;">在 Linux 操作系統下的 ssh 網路協定, 可以利用 ssh-keygen 建立, 內定的 keys 將會存入使用者工作目錄下的 .ssh 目錄, 且以 id_rsa 與 id_rsa.pub 代表其 private key 與 public key. 至於 Linux 環境下的 ssh proxy 設定, 則位於 .ssh/config 檔案中, config 的設定格式為:</p>
+<p style="padding-left: 60px;">Host demo</p>
+<p style="padding-left: 60px;">User git</p>
+<p style="padding-left: 60px;">Hostname github.com</p>
+<p style="padding-left: 60px;">ProxyCommand /usr/bin/ncat --proxy p4.cycu.org:3128 --proxy-type http %h %p</p><br />About << <a href='About.html'>Previous</a> <a href='cmsimde.html'>Next</a> >> cmsimde</div>
         
     <!-- footer -->
       <div class="container">
