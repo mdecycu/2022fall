@@ -2,7 +2,7 @@
         <head>
         <title>2022fall</title>
         <meta charset="utf-8">
-<meta property="head" content="H3">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -141,8 +141,15 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">Github << <a href='Github.html'>Previous</a> <a href='Classroom.html'>Next</a> >> Classroom<br /><h1>Pages</h1>
-<br />Github << <a href='Github.html'>Previous</a> <a href='Classroom.html'>Next</a> >> Classroom</div>
+    <div id="tipue_search_content">CoppeliaSim << <a href='CoppeliaSim.html'>Previous</a> <a href='Examples.html'>Next</a> >> Examples<br /><h1>Python script</h1>
+<p>CoppeliaSim 4.3.0 rev12 可以採 Python script 控制場景中的元件. 但必須在 C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt 中進行設定:</p>
+<p style="padding-left: 30px;">原先 usrset.txt 172 與 173 行內容:</p>
+<p style="padding-left: 60px;">defaultPython = // e.g. c:/Python38/python.exe<br/>executeUnsafe = false // recommended to keep false.</p>
+<p style="padding-left: 30px;">假設 python.exe 位於 C:\portable_python_w10_nx_robodk\Python38 目錄下, 則為了讓 CoppeliaSim 能夠在場景中解譯 Python script, usrset.txt 的 172 與 173 行必須改為:</p>
+<p style="padding-left: 60px;"><span>defaultPython = C:/portable_python_w10_nx_robodk/Python38/python.exe</span><br/><span>executeUnsafe = true</span></p>
+<p style="padding-left: 30px;"><span>假如使用 Python 3.10.6 解譯系統, 則 </span>usrset.txt 的 172 與 173 行必須改為:</p>
+<p style="padding-left: 60px;"><span>defaultPython =<span> </span>C:/portable_python_w10_nx_robodk/Python310/python.exe</span><br/><span>executeUnsafe = true</span></p>
+<p style="padding-left: 30px;"><span>C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt 設定檔案修改之後, CoppeliaSim 必須重新啟動設定才會生效.</span></p><br />CoppeliaSim << <a href='CoppeliaSim.html'>Previous</a> <a href='Examples.html'>Next</a> >> Examples</div>
         
     <!-- footer -->
       <div class="container">

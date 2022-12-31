@@ -78,8 +78,8 @@
 <p>最早出現的 Python 解譯器, 是採用 C 程式語言編寫的, 稱為 CPython. 此外也有採用 Python 編寫的 Python 解譯器, 稱為 <a href="https://www.pypy.org/">Pypy</a>. 也又用 Java 編寫的 Python 解譯器, 稱為 <a href="https://www.jython.org/">Jython</a>. 以及採用 .NET 技術編寫的 <a href="https://ironpython.net/">IronPython</a>.</p>
 <p>至於利用 Javascript 編寫的 Python 解譯器, 其中一種稱為 <a href="https://brython.info/">Brython</a>.</p>
 <p>Brython 的執行機制是讓使用者在網頁中導入以 Javascript 編寫的 Python 解譯器程式庫之後, 再將使用者寫在網頁超文件 &lt;script type="text/python"&gt;&lt;/script&gt; 標註中的 Python 程式碼轉為 Javascript 後執行.</p>
-<p>Brython 是一種網頁前端的 Python 程式語言, 由於 Brython 程式碼的執行需要在客戶端的瀏覽器, 將伺服器中的 Brython 解譯器下載至客戶端, 之後下載伺服器上所要執行的 Brython 程式原始碼之後, 才能利用瀏覽器中的 Javascript 解譯器進行轉檔後執行, 因此:</p>
-<p>Brython 並沒有 CPython 眾多的各式程式庫檔案, 而比較適合如 Javascript 解譯器一樣, 讓網站開發者將輕巧的 Brython 程式碼放在網頁中, 並設法與位於伺服器中的其他 CPython 程式結合使用. 以便達到較少延遲的網頁互動反應效能.</p>
+<p><span style="color: #ff0000;">Brython 是一種網頁前端的 Python 程式語言</span>, 由於 Brython 程式碼的執行需要在客戶端的瀏覽器, 將伺服器中的 Brython 解譯器下載至客戶端, 之後下載伺服器上所要執行的 Brython 程式原始碼之後, 才能利用瀏覽器中的 Javascript 解譯器進行轉檔後執行, 因此:</p>
+<p><span style="color: #ff0000;">Brython 並沒有 CPython 眾多的各式程式庫檔案</span>, 而比較適合如 Javascript 解譯器一樣, 讓網站開發者將輕巧的 Brython 程式碼放在網頁中, 並設法與位於伺服器中的其他 CPython 程式結合使用. 以便達到較少延遲的網頁互動反應效能.</p>
 <p>Brython 在網站前端, 加上伺服器後端的 CPython 結合應用機制, 就如同 <a href="https://nodejs.org/en/">Node.js</a> 或 <a href="https://deno.land/">Deno</a> 網站程式開發機制.</p><h2>Brython</h2>
 <p>cmsite: wcms use <a href="https://github.com/mdecycu/cmsimde">https://github.com/mdecycu/cmsimde</a> as submodule</p>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
@@ -366,7 +366,14 @@ doc["aitetris"].bind("click", aitetris.do)
 <h2>NX</h2>
 <h2>Onshape</h2>
 <h1>CoppeliaSim</h1>
-<h1>Examples</h1>
+<p>CoppeliaSim 教育版 4.3.0 rev12 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EWdB5MhlZRJKjt5UiNRebR8BN6_AmU0IX1HC7Y6dnRBzQw">下載</a> (134 MB, 必須登入 @nfu OneDrive 帳號後才能下載).</p><h2>Python script</h2>
+<p>CoppeliaSim 4.3.0 rev12 可以採 Python script 控制場景中的元件. 但必須在 C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt 中進行設定:</p>
+<p style="padding-left: 30px;">原先 usrset.txt 172 與 173 行內容:</p>
+<p style="padding-left: 60px;">defaultPython = // e.g. c:/Python38/python.exe<br/>executeUnsafe = false // recommended to keep false.</p>
+<p style="padding-left: 30px;">假設 python.exe 位於 C:\portable_python_w10_nx_robodk\Python38 目錄下, 則為了讓 CoppeliaSim 能夠在場景中解譯 Python script, usrset.txt 的 172 與 173 行必須改為:</p>
+<p style="padding-left: 60px;"><span>defaultPython = C:/portable_python_w10_nx_robodk/Python38/python.exe</span><br/><span>executeUnsafe = true</span></p>
+<p style="padding-left: 30px;"><span>假如使用 Python 3.10.6 解譯系統, 則 </span>usrset.txt 的 172 與 173 行必須改為:</p>
+<p style="padding-left: 60px;"><span>defaultPython =<span> </span>C:/portable_python_w10_nx_robodk/Python310/python.exe</span><br/><span>executeUnsafe = true</span></p><h1>Examples</h1>
 <h2>cp2022</h2>
 <p>為何學習計算機程式需要建立個人倉儲?</p>
 <p style="padding-left: 30px;">從 <a href="https://survey.stackoverflow.co/2022/#overview">Stack Overflow Developer Survey 2022</a> 可得知, 專業的程式開發者將 Git 視為最基本的工具. 而 Git 工具的使用與個人在 Github 的倉儲相結合, 可以有效採分散式的方式管理個人或團隊所開發的程式碼. </p>

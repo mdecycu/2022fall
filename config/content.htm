@@ -366,7 +366,15 @@ doc["aitetris"].bind("click", aitetris.do)
 <h2>NX</h2>
 <h2>Onshape</h2>
 <h1>CoppeliaSim</h1>
-<h1>Examples</h1>
+<p>CoppeliaSim 教育版 4.3.0 rev12 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EWdB5MhlZRJKjt5UiNRebR8BN6_AmU0IX1HC7Y6dnRBzQw">下載</a> (134 MB, 必須登入 @nfu OneDrive 帳號後才能下載).</p><h2>Python script</h2>
+<p>CoppeliaSim 4.3.0 rev12 可以採 Python script 控制場景中的元件. 但必須在 C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt 中進行設定:</p>
+<p style="padding-left: 30px;">原先 usrset.txt 172 與 173 行內容:</p>
+<p style="padding-left: 60px;">defaultPython = // e.g. c:/Python38/python.exe<br/>executeUnsafe = false // recommended to keep false.</p>
+<p style="padding-left: 30px;">假設 python.exe 位於 C:\portable_python_w10_nx_robodk\Python38 目錄下, 則為了讓 CoppeliaSim 能夠在場景中解譯 Python script, usrset.txt 的 172 與 173 行必須改為:</p>
+<p style="padding-left: 60px;"><span>defaultPython = C:/portable_python_w10_nx_robodk/Python38/python.exe</span><br/><span>executeUnsafe = true</span></p>
+<p style="padding-left: 30px;"><span>假如使用 Python 3.10.6 解譯系統, 則 </span>usrset.txt 的 172 與 173 行必須改為:</p>
+<p style="padding-left: 60px;"><span>defaultPython =<span> </span>C:/portable_python_w10_nx_robodk/Python310/python.exe</span><br/><span>executeUnsafe = true</span></p>
+<p style="padding-left: 30px;"><span>C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt 設定檔案修改之後, CoppeliaSim 必須重新啟動設定才會生效.</span></p><h1>Examples</h1>
 <h2>cp2022</h2>
 <p>為何學習計算機程式需要建立個人倉儲?</p>
 <p style="padding-left: 30px;">從 <a href="https://survey.stackoverflow.co/2022/#overview">Stack Overflow Developer Survey 2022</a> 可得知, 專業的程式開發者將 Git 視為最基本的工具. 而 Git 工具的使用與個人在 Github 的倉儲相結合, 可以有效採分散式的方式管理個人或團隊所開發的程式碼. </p>
