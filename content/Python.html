@@ -142,7 +142,14 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">Stud << <a href='Stud.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython<br /><h1>Python</h1>
-<br />Stud << <a href='Stud.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
+<p>Python 是一種解譯式程式語言, 使用者編寫程式碼後, 可以直接執行, 從使用者要求 Python 程式執行時, 解譯器 (Interpreter) 會即時將原始碼轉為 Byte code, 然後根據所在操作系統的二位元檔案格式轉為可以執行的格式後執行.</p>
+<p>與解譯式程式語言相對的是編譯式程式語言, 例如: C/C++ 或 Rust 等. 編譯器稱為 Compiler, 當使用者完成 C 或 C++ 程式開發後, 通常需要進行編譯 (Compile) 與連結 (Link) 等過程, 才能得到可以執行的命令檔案.</p>
+<p>最早出現的 Python 解譯器, 是採用 C 程式語言編寫的, 稱為 CPython. 此外也有採用 Python 編寫的 Python 解譯器, 稱為 <a href="https://www.pypy.org/">Pypy</a>. 也又用 Java 編寫的 Python 解譯器, 稱為 <a href="https://www.jython.org/">Jython</a>. 以及採用 .NET 技術編寫的 <a href="https://ironpython.net/">IronPython</a>.</p>
+<p>至於利用 Javascript 編寫的 Python 解譯器, 其中一種稱為 <a href="https://brython.info/">Brython</a>.</p>
+<p>Brython 的執行機制是讓使用者在網頁中導入以 Javascript 編寫的 Python 解譯器程式庫之後, 再將使用者寫在網頁超文件 &lt;script type="text/python"&gt;&lt;/script&gt; 標註中的 Python 程式碼轉為 Javascript 後執行.</p>
+<p><span style="color: #ff0000;">Brython 是一種網頁前端的 Python 程式語言</span>, 由於 Brython 程式碼的執行需要在客戶端的瀏覽器, 將伺服器中的 Brython 解譯器下載至客戶端, 之後下載伺服器上所要執行的 Brython 程式原始碼之後, 才能利用瀏覽器中的 Javascript 解譯器進行轉檔後執行, 因此:</p>
+<p><span style="color: #ff0000;">Brython 並沒有 CPython 眾多的各式程式庫檔案</span>, 而比較適合如 Javascript 解譯器一樣, 讓網站開發者將輕巧的 Brython 程式碼放在網頁中, 並設法與位於伺服器中的其他 CPython 程式結合使用. 以便達到較少延遲的網頁互動反應效能.</p>
+<p>Brython 在網站前端, 加上伺服器後端的 CPython 結合應用機制, 就如同 <a href="https://nodejs.org/en/">Node.js</a> 或 <a href="https://deno.land/">Deno</a> 網站程式開發機制.</p><br />Stud << <a href='Stud.html'>Previous</a> <a href='Brython.html'>Next</a> >> Brython</div>
         
     <!-- footer -->
       <div class="container">
