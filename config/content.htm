@@ -2,6 +2,7 @@
 <p>網站: <a href="https://mde.tw/2022fall">https://mde.tw/2022fall</a> </p>
 <p>倉儲: <a href="https://github.com/mdecycu/2022fall">https://github.com/mdecycu/2022fall</a> </p>
 <p>本網站主要統整 2022 Fall <a href="https://mde.tw/content/cp2022">計算機程式</a>以及<a href="https://mde.tw/content/cad2022">電腦輔助設計與實習</a>課程的相關內容、議題與對策.</p>
+<p>2022 Fall 最終版的 Python 可攜程式系統為 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EXABheFswCtEtT5p-9uDN4ABuK3DASC8mKkFzpLA3q7f6g?e=V2ZBNw">portable_python_w10_nx_robodk.7z</a> (1.03 GB, 必須登入 @nfu OneDrive 帳號後才能下載), 這是在課程第十週釋出的版本, 由於必須配合 NX2027 所採用的 NXOpen for Python API 程式解譯需求, 除了 Python 3.10.6 版之外, 還額外提供 Python 3.8.10 的解譯器版本, 以及 <a href="https://robodk.com/download">RoboDK 5.5</a> 可攜系統.</p>
 <p>相關課程:</p>
 <p style="padding-left: 30px;">網際內容管理 <a href="https://mde.tw/wcm2023">https://mde.tw/wcm2023</a> </p>
 <p style="padding-left: 30px;">協同產品設計實習 <a href="https://mde.tw/cd2023">https://mde.tw/cd2023</a> </p><h2>networking</h2>
@@ -30,7 +31,16 @@
 <p>能夠執行 cmsimde 動態網站的 Python 需要安裝下列模組:</p>
 <p><span>flask flask_cors bs4 lxml pelican markdown pyopenssl</span></p>
 <p><span>而在近端為了管理 cmsimde 中的網際簡報與網誌, 通常建議再加裝 leo 模組, 因此希望執行 cmsimde 動態網站的 Python 環境, 需要以 pip 安裝所需模組:</span></p>
-<p style="padding-left: 30px;"><span><span style="color: #ff0000;">pip install flask flask_cors bs4 lxml pelican markdown leo pyopenssl</span> </span></p><h1>Git</h1>
+<p style="padding-left: 30px;"><span><span style="color: #ff0000;">pip install flask flask_cors bs4 lxml pelican markdown leo pyopenssl</span> </span></p><h2>Leo Editor</h2>
+<p>Importer:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''Recursively import all python files in a directory and clean the result.'''
+c.recursiveImport(
+    dir_ = r'./',
+    kind = '@clean', # The new best practice.
+    safe_at_file = False,
+    theTypes = None, # Same as ['.py']
+)</pre>
+<p></p><h1>Git</h1>
 <p>Git 是在 2005 年為了有效管理 Linux 操作系統的原始碼而建立. 具有分散式版次管理的特性, 在多人協同開發程式碼的過程, 可以清楚看出各程式段由誰貢獻, 且其分支架構可以讓使用者切出不會影響主分支的版本進行改版, 一旦主分支之外的版本完成後, 可以選擇將改版功能合併至主分支或保留紀錄.</p>
 <p>在可攜程式環境中所提供的 git.exe 指令程式來自 <a href="https://git-scm.com/download/win">Git - Downloading Package (git-scm.com)</a> 中的 portablegit.</p><h2>Github</h2>
 <h3>Pages</h3>
@@ -70,7 +80,9 @@
 <li>近端改版已經推送, 但希望刪除這些提交推送的改版內容: git revert 版次號 --no-edit</li>
 </ol>
 </div><h2>repo</h2><h3>localhost</h3>
-<h3>Replit</h3>
+<p>在近端(也就是使用者工作的電腦)維護 Github 的倉儲, 有兩種認證方法, 可採用 SSH 認證, 或者採用 Github Token 認證. 而認證的目的是讓擁有 Github 倉儲維護權限的用戶, 可以將近端的改版內容推到 Github 雲端儲存.</p>
+<p>採用 Github Token 認證:</p>
+<p style="padding-left: 30px;"></p><h3>Replit</h3>
 <h3>Stud</h3>
 <h1>Python</h1>
 <p>Python 是一種解譯式程式語言, 使用者編寫程式碼後, 可以直接執行, 從使用者要求 Python 程式執行時, 解譯器 (Interpreter) 會即時將原始碼轉為 Byte code, 然後根據所在操作系統的二位元檔案格式轉為可以執行的格式後執行.</p>
@@ -363,11 +375,40 @@ doc["aitetris"].bind("click", aitetris.do)
 <!-- editor2 結束 --><hr/>
 <h1>CAD</h1>
 <h2>Solvespace</h2>
-<h2>NX</h2>
+<p>要在 Windows 64 位元操作系統中編譯 Solvespace 原始碼, 可以下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EeaLUTntsAZBjKrh-e_N_doBX6hV_CAakHv2A2g_Ft6MoA?e=ba2DGF">msys64_20210419_for_cad2022.7z</a> (3.4 GB 解開後 12.5 GB, 必須登入 @nfu OneDrive 帳號後才能下載).</p>
+<p>編譯 Solvespace 原始碼 v3.1 步驟如下:</p>
+<div>(一) 下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EfdRJOC38oNErVbz4uru1loBZvIfMs2f1W39SK6bPYtukA?e=NSkNhD" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/efdrjoc38onervbz4uru1lobzvifms2f1w39sk6bpytuka?e=nsknhd">msys64_20210419 for cad2022.7z</a>.</div>
+<div></div>
+<div>(二) 在 start 批次檔案中增加 msys2 搜尋路徑:</div>
+<div></div>
+<div style="padding-left: 30px;">REM 設定 msys2 64 位元的執行路徑<br/>set path_msys2=%cd%\msys64_20210419\mingw64\bin;<br/>REM 將 %path_msys2% 加入 path 設定<br/>path=%cd%;%path_python%;%path_git%;%path_tcc%;%path_scite%;%path_msys2%;%path%;</div>
+<div style="padding-left: 30px;"></div>
+<div>(三) 啟動批次檔案附加 msys2 搜尋路徑後, 必須重新啟動可攜程式系統.</div>
+<div></div>
+<div>
+<div>(四) 接下來取得 Solvespace 原始碼並切換到 v3.1 分支:</div>
+<div></div>
+<div style="padding-left: 30px;">git clone --recurse-submodules https://github.com/solvespace/solvespace.git<br/>cd solvespace<br/>git checkout v3.1<br/>mkdir build<br/>cd build<br/>cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release<br/>make</div>
+<div></div>
+<div>(五) 編譯完成後, 位於 solvespace\build\bin 目錄中的 solvespace.exe 需要配合 msys64_20210419\mingw64\bin\libwinpthread-1.dll 檔案才能執行.</div>
+<div></div>
+<div>Reference:</div>
+<div></div>
+<div>
+<div>
+<div style="padding-left: 30px;"><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EaPyatU3SS9PgqlZqzIMoEYBAyBazQWurjUinQDW68gpng?e=Scn3Lw" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/eapyatu3ss9pgqlzqzimoeybaybazqwurjuinqdw68gpng?e=scn3lw">solvespace v3.1 原始碼, 編譯結果與 Leo Editor 專案.7z</a></div>
+<div style="padding-left: 30px;"><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EYBFNxzRFCxEnuhXmPsF-fkBs6res9utPvRAoifXhzFDrw?e=LHnNTS" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/eybfnxzrfcxenuhxmpsf-fkbs6res9utpvraoifxhzfdrw?e=lhnnts">solvespace.exe compiled with msys2.7z</a></div>
+<div style="padding-left: 30px;"><a href="https://github.com/solvespace/solvespace/issues/1303" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://github.com/solvespace/solvespace/issues/1303">Solvespace Development Documentation</a></div>
+</div>
+</div>
+</div><h2>NX</h2>
 <h2>Onshape</h2>
 <h1>CoppeliaSim</h1>
-<p>CoppeliaSim 教育版 4.3.0 rev12 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EWdB5MhlZRJKjt5UiNRebR8BN6_AmU0IX1HC7Y6dnRBzQw">下載</a> (134 MB, 必須登入 @nfu OneDrive 帳號後才能下載).</p><h2>Python script</h2>
-<p>CoppeliaSim 4.3.0 rev12 可以採 Python script 控制場景中的元件. 但必須在 C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt 中進行設定:</p>
+<p>CoppeliaSim 教育版 4.3.0 rev12 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EWdB5MhlZRJKjt5UiNRebR8BN6_AmU0IX1HC7Y6dnRBzQw">下載</a> (134 MB, 必須登入 @nfu OneDrive 帳號後才能下載).</p>
+<p>與 CoppeliaSim 配合使用的可攜程式系統:</p>
+<p style="padding-left: 30px;"><span>2022 Fall 最終版的 Python 可攜程式系統為</span><span><span> </span></span><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EXABheFswCtEtT5p-9uDN4ABuK3DASC8mKkFzpLA3q7f6g?e=V2ZBNw">portable_python_w10_nx_robodk.7z</a><span><span> </span>(1.03 GB, 必須登入 @nfu OneDrive 帳號後才能下載), 這是在課程第十週釋出的版本, 由於必須配合 NX2027 所採用的 NXOpen for Python API 程式解譯需求, 除了 Python 3.10.6 版之外, 還額外提供 Python 3.8.10 的解譯器版本, 以及</span><span><span> </span></span><a href="https://robodk.com/download">RoboDK 5.5</a><span><span> </span>可攜系統.</span></p><h2>Python script</h2>
+<p><span>2022 Fall 最終版的 Python 可攜程式系統為</span><span><span> </span></span><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EXABheFswCtEtT5p-9uDN4ABuK3DASC8mKkFzpLA3q7f6g?e=V2ZBNw">portable_python_w10_nx_robodk.7z</a><span><span> </span>(1.03 GB, 必須登入 @nfu OneDrive 帳號後才能下載), 這是在課程第十週釋出的版本, 由於必須配合 NX2027 所採用的 NXOpen for Python API 程式解譯需求, 除了 Python 3.10.6 版之外, 還額外提供 Python 3.8.10 的解譯器版本, 以及</span><span><span> </span></span><a href="https://robodk.com/download">RoboDK 5.5</a><span><span> </span>可攜系統.</span></p>
+<p>CoppeliaSim 4.3.0 rev12 可以採 Python script 控制場景中的元件. 但必須在 <span style="color: #ff0000;">C:\CoppeliaSimEdu_4.3.0_rev12\system\usrset.txt</span> 中進行設定:</p>
 <p style="padding-left: 30px;">原先 usrset.txt 172 與 173 行內容:</p>
 <p style="padding-left: 60px;">defaultPython = // e.g. c:/Python38/python.exe<br/>executeUnsafe = false // recommended to keep false.</p>
 <p style="padding-left: 30px;">假設 python.exe 位於 C:\portable_python_w10_nx_robodk\Python38 目錄下, 則為了讓 CoppeliaSim 能夠在場景中解譯 Python script, usrset.txt 的 172 與 173 行必須改為:</p>

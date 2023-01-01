@@ -130,7 +130,7 @@ img.add_border {
                             <li><a href="./../blog/index.html">blog</a></li>
                         </ul>
                       </li>
-                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='networking.html'>networking</a><li><a href='cmsimde.html'>cmsimde</a></li></ul><li class='has-children'><a href='Git.html'>Git</a><ul class='dropdown'><li class='has-children'><a href='Github.html'>Github</a><ul class='dropdown'><li><a href='Pages.html'>Pages</a><li><a href='Classroom.html'>Classroom</a><li><a href='QandA.html'>QandA</a></li></ul><li class='has-children'><a href='repo.html'>repo</a><ul class='dropdown'><li><a href='localhost.html'>localhost</a><li><a href='Replit.html'>Replit</a><li><a href='Stud.html'>Stud</a></li></li></ul></ul><li class='has-children'><a href='Python.html'>Python</a><ul class='dropdown'><li><a href='Brython.html'>Brython</a></li></ul><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Solvespace.html'>Solvespace</a><li><a href='NX.html'>NX</a><li><a href='Onshape.html'>Onshape</a></li></ul><li class='has-children'><a href='CoppeliaSim.html'>CoppeliaSim</a><ul class='dropdown'><li><a href='Python script.html'>Python script</a></li></ul><li class='has-children'><a href='Examples.html'>Examples</a><ul class='dropdown'><li class='has-children'><a href='cp2022.html'>cp2022</a><ul class='dropdown'><li><a href='w17.html'>w17</a><li><a href='canvas.html'>canvas</a></li>
+                     <li class='has-children'><a href='About.html'>About</a><ul class='dropdown'><li><a href='networking.html'>networking</a><li><a href='cmsimde.html'>cmsimde</a><li><a href='Leo Editor.html'>Leo Editor</a></li></ul><li class='has-children'><a href='Git.html'>Git</a><ul class='dropdown'><li class='has-children'><a href='Github.html'>Github</a><ul class='dropdown'><li><a href='Pages.html'>Pages</a><li><a href='Classroom.html'>Classroom</a><li><a href='QandA.html'>QandA</a></li></ul><li class='has-children'><a href='repo.html'>repo</a><ul class='dropdown'><li><a href='localhost.html'>localhost</a><li><a href='Replit.html'>Replit</a><li><a href='Stud.html'>Stud</a></li></li></ul></ul><li class='has-children'><a href='Python.html'>Python</a><ul class='dropdown'><li><a href='Brython.html'>Brython</a></li></ul><li class='has-children'><a href='CAD.html'>CAD</a><ul class='dropdown'><li><a href='Solvespace.html'>Solvespace</a><li><a href='NX.html'>NX</a><li><a href='Onshape.html'>Onshape</a></li></ul><li class='has-children'><a href='CoppeliaSim.html'>CoppeliaSim</a><ul class='dropdown'><li><a href='Python script.html'>Python script</a></li></ul><li class='has-children'><a href='Examples.html'>Examples</a><ul class='dropdown'><li class='has-children'><a href='cp2022.html'>cp2022</a><ul class='dropdown'><li><a href='w17.html'>w17</a><li><a href='canvas.html'>canvas</a></li>
                       </ul>
                 </nav>
               </div>
@@ -142,7 +142,33 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">CAD << <a href='CAD.html'>Previous</a> <a href='NX.html'>Next</a> >> NX<br /><h1>Solvespace</h1>
-<br />CAD << <a href='CAD.html'>Previous</a> <a href='NX.html'>Next</a> >> NX</div>
+<p>要在 Windows 64 位元操作系統中編譯 Solvespace 原始碼, 可以下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EeaLUTntsAZBjKrh-e_N_doBX6hV_CAakHv2A2g_Ft6MoA?e=ba2DGF">msys64_20210419_for_cad2022.7z</a> (3.4 GB 解開後 12.5 GB, 必須登入 @nfu OneDrive 帳號後才能下載).</p>
+<p>編譯 Solvespace 原始碼 v3.1 步驟如下:</p>
+<div>(一) 下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EfdRJOC38oNErVbz4uru1loBZvIfMs2f1W39SK6bPYtukA?e=NSkNhD" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/efdrjoc38onervbz4uru1lobzvifms2f1w39sk6bpytuka?e=nsknhd">msys64_20210419 for cad2022.7z</a>.</div>
+<div></div>
+<div>(二) 在 start 批次檔案中增加 msys2 搜尋路徑:</div>
+<div></div>
+<div style="padding-left: 30px;">REM 設定 msys2 64 位元的執行路徑<br/>set path_msys2=%cd%\msys64_20210419\mingw64\bin;<br/>REM 將 %path_msys2% 加入 path 設定<br/>path=%cd%;%path_python%;%path_git%;%path_tcc%;%path_scite%;%path_msys2%;%path%;</div>
+<div style="padding-left: 30px;"></div>
+<div>(三) 啟動批次檔案附加 msys2 搜尋路徑後, 必須重新啟動可攜程式系統.</div>
+<div></div>
+<div>
+<div>(四) 接下來取得 Solvespace 原始碼並切換到 v3.1 分支:</div>
+<div></div>
+<div style="padding-left: 30px;">git clone --recurse-submodules https://github.com/solvespace/solvespace.git<br/>cd solvespace<br/>git checkout v3.1<br/>mkdir build<br/>cd build<br/>cmake .. -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Release<br/>make</div>
+<div></div>
+<div>(五) 編譯完成後, 位於 solvespace\build\bin 目錄中的 solvespace.exe 需要配合 msys64_20210419\mingw64\bin\libwinpthread-1.dll 檔案才能執行.</div>
+<div></div>
+<div>Reference:</div>
+<div></div>
+<div>
+<div>
+<div style="padding-left: 30px;"><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EaPyatU3SS9PgqlZqzIMoEYBAyBazQWurjUinQDW68gpng?e=Scn3Lw" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/eapyatu3ss9pgqlzqzimoeybaybazqwurjuinqdw68gpng?e=scn3lw">solvespace v3.1 原始碼, 編譯結果與 Leo Editor 專案.7z</a></div>
+<div style="padding-left: 30px;"><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EYBFNxzRFCxEnuhXmPsF-fkBs6res9utPvRAoifXhzFDrw?e=LHnNTS" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/eybfnxzrfcxenuhxmpsf-fkbs6res9utpvraoifxhzfdrw?e=lhnnts">solvespace.exe compiled with msys2.7z</a></div>
+<div style="padding-left: 30px;"><a href="https://github.com/solvespace/solvespace/issues/1303" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://github.com/solvespace/solvespace/issues/1303">Solvespace Development Documentation</a></div>
+</div>
+</div>
+</div><br />CAD << <a href='CAD.html'>Previous</a> <a href='NX.html'>Next</a> >> NX</div>
         
     <!-- footer -->
       <div class="container">
