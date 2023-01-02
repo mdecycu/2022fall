@@ -418,19 +418,102 @@ for i in range(5):
 <p>int(in) 可以將輸入的 in 變數轉為整數 (integer)</p>
 <p>float(in) 可以將輸入的 in 變數轉為浮點數 (floating number)</p>
 <p>str(in) 可以將輸入的 in 變數轉為字串 (string)</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 變數 a 與 1 對應
+a = 1
+# 若要讓 a 的對應值與其他字串相加, 則 a 必須從整數轉為字串
+# 整數可以利用 str() 轉為字串
+print("a 的對應值為:"  + str(a))</pre>
+<p>上面整數轉字串程式執行結果:</p>
+<div id="int_to_str"></div>
+<script type="text/python">
+from browser import document, html
+int_to_str_pos = document["int_to_str"]
+a = 1
+int_to_str_pos <= "a 的對應值為:"  + str(a)
+int_to_str_pos <= html.BR()
+</script>
 <p><span style="color: #ff0000;">資料的基本運算</span></p>
 <p>資料包含 integer, floating number 與 string</p>
 <p>整數與浮點數可以進行加、減、乘與除運算.</p>
 <p>字串則可進行加與乘運算.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 以下可以利用 for 重複迴圈進行整數累加
+# 先設定累加總和變數為 sum
+# 一開始尚未進行整數累加, sum 的對應值為 0
+sum = 0
+# 接著利用 for 迴圈以特定增量值產生希望進入累加的整數
+for i in range(1, 10):
+    # 假設從 1 要累加到 9, 則上列迴圈可以將增量後的整數對應到 i 變數
+    sum = sum + i
+    # 當迴圈逐一產生增量後的 i 整數後, 分別與當時的 sum 對應值累加
+# 當 i 增加到 9 時, 程式的執行就會跳出 for 環圈, 這時就可以印出累加後的總整數值
+print("從 1 累加到 9 總數值為: " + str(sum))</pre>
+<p>以上累加程式執行結果:</p>
+<div id="add_to_9"></div>
+<script type="text/python">
+from browser import document, html
+# 以下可以利用 for 重複迴圈進行整數累加
+# 先設定累加總和變數為 sum
+# 一開始尚未進行整數累加, sum 的對應值為 0
+sum = 0
+# 接著利用 for 迴圈以特定增量值產生希望進入累加的整數
+for i in range(1, 10):
+    # 假設從 1 要累加到 9, 則上列迴圈可以將增量後的整數對應到 i 變數
+    sum = sum + i
+    # 當迴圈逐一產生增量後的 i 整數後, 分別與當時的 sum 對應值累加
+# 當 i 增加到 9 時, 程式的執行就會跳出 for 環圈, 這時就可以印出累加後的總整數值
+add_to_9_pos = document["add_to_9"]
+add_to_9_pos <= "從 1 累加到 9 總數值為: " + str(sum)
+add_to_9_pos <= html.BR()
+</script>
 <p><span style="color: #ff0000;">函式定義與呼叫</span></p>
 <p>def 為 define 的縮寫, 在 Python 程式語法, 可以利用 def 定義函式.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 將累加程式寫為函式, start 輸入變數為累加起始整數, 然後增量 1 累加至 end 整數
+def int_add(start, end):
+    sum = 0
+    for i in range(start, end+1):
+        sum = sum + i
+    return "從 " + str(start) + " 累加到 " + str(end) + " 總數值為: " + str(sum)
+
+int_add(1, 9)</pre>
+<p>上列累加函式定義與呼叫執行結果為:</p>
+<div id="add_to"></div>
+<script type="text/python">
+from browser import document, html
+# 將累加程式寫為函式, start 輸入變數為累加起始整數, 然後增量 1 累加至 end 整數
+def int_add(start, end):
+    sum = 0
+    for i in range(start, end+1):
+        sum = sum + i
+    return "從 " + str(start) + " 累加到 " + str(end) + " 總數值為: " + str(sum)
+
+add_to_pos = document["add_to"]
+add_to_pos <= int_add(1, 9)
+add_to_pos <= html.BR()
+</script>
 <p><span style="color: #ff0000;">從 Gist 讀取資料</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 將 Brython 程式存入 Gist, 並取得其 url 網址
+url = "https://gist.githubusercontent.com/mdecycu/82d5d77b917a5d6c656233767afe4bea/raw/350ea45f6e3f130a15faf98c82b6475c7dcdfef4/rect_walk.py"
+# 利用 open() 與 read() 取得程式碼
+data = open(url).read()
+# 利用 exec() 執行
+ns = {'__name__':'__main__'}
+exec(data, ns)</pre>
+<p>上列從 Gist 讀取程式碼後執行結果:</p>
+<div id="brython_div1"></div>
+<script type="text/python">
+# 將 Brython 程式存入 Gist, 並取得其 url 網址
+url = "https://gist.githubusercontent.com/mdecycu/82d5d77b917a5d6c656233767afe4bea/raw/350ea45f6e3f130a15faf98c82b6475c7dcdfef4/rect_walk.py"
+# 利用 open() 與 read() 取得程式碼
+data = open(url).read()
+# 利用 exec() 執行
+ns = {'__name__':'__main__'}
+exec(data, ns)
+</script>
 <p><span style="color: #ff0000;">數列應用</span></p>
 <p>List</p>
 <p><span style="color: #ff0000;">字典應用</span></p>
 <p>Dict</p>
 <p><span style="color: #ff0000;">Brython 的 Canvas 靜態繪圖</span></p>
-<p></p>
 <p><span style="color: #ff0000;">Brython 的 Canvas 動態繪圖</span></p>
 <p></p>
 <p></p>
