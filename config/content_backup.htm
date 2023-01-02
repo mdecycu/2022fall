@@ -32,7 +32,15 @@
 <p><span>flask flask_cors bs4 lxml pelican markdown pyopenssl</span></p>
 <p><span>而在近端為了管理 cmsimde 中的網際簡報與網誌, 通常建議再加裝 leo 模組, 因此希望執行 cmsimde 動態網站的 Python 環境, 需要以 pip 安裝所需模組:</span></p>
 <p style="padding-left: 30px;"><span><span style="color: #ff0000;">pip install flask flask_cors bs4 lxml pelican markdown leo pyopenssl</span> </span></p><h2>Leo Editor</h2>
-<h1>Git</h1>
+<p>Leo Editor 可以利用以下程式 recursively import 原始程式 (放入 body panel 後 按 Ctrl + b 執行):</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">'''Recursively import all python files in a directory and clean the result.'''
+c.recursiveImport(
+    dir_ = r'./',
+    kind = '@clean', # The new best practice.
+    safe_at_file = False,
+    theTypes = None, # Same as ['.py']
+)</pre>
+<p></p><h1>Git</h1>
 <p>Git 是在 2005 年為了有效管理 Linux 操作系統的原始碼而建立. 具有分散式版次管理的特性, 在多人協同開發程式碼的過程, 可以清楚看出各程式段由誰貢獻, 且其分支架構可以讓使用者切出不會影響主分支的版本進行改版, 一旦主分支之外的版本完成後, 可以選擇將改版功能合併至主分支或保留紀錄.</p>
 <p>在可攜程式環境中所提供的 git.exe 指令程式來自 <a href="https://git-scm.com/download/win">Git - Downloading Package (git-scm.com)</a> 中的 portablegit.</p><h2>Github</h2>
 <h3>Pages</h3>
@@ -365,8 +373,73 @@ doc["aitetris"].bind("click", aitetris.do)
 <p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
 <div id="brython_div2"></div>
 <!-- editor2 結束 --><hr/>
-<h1>CAD</h1>
-<h2>Solvespace</h2>
+<h2>cp</h2>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+</script>
+</p>
+<p>Computer Programming 計算機程式</p>
+<p>以 Python 程式語言學習計算機程式需要會甚麼?</p>
+<p><span style="color: #ff0000;">變數宣告</span></p>
+<p>變數訂定規則</p>
+<ol>
+<li>不可使用 Python 關鍵字作為變數</li>
+<li>只能以英文大小寫或 _ (底線) 作為變數開頭</li>
+<li>變數名稱分別英文大寫與小寫</li>
+</ol>
+<p>Python 程式語言的關鍵字:</p>
+<div id="keyword"></div>
+<script type="text/python">
+from browser import document, html
+keyword_pos = document["keyword"]
+import keyword
+for i in keyword.kwlist:
+    keyword_pos <= i
+    keyword_pos <= ", "
+keyword_pos <= "共有 " + str(len(keyword.kwlist)) + " 個."
+</script>
+<p>變數宣告範例:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 使用 temp 作為變數名稱, 並與整數 30 對應
+temp = 30
+# 這時印出 temp 的對應值, 就會是 30
+print(temp)
+
+# for 迴圈所使用的 index 變數 i 無需在迴圈之前進行宣告.
+# 以下程式會印出 0, 1, 2, 3,4 等五個整數.
+for i in range(5):
+    print(i)</pre>
+<p><span style="color: #ff0000;">資料型別轉換</span></p>
+<p>int(in) 可以將輸入的 in 變數轉為整數 (integer)</p>
+<p>float(in) 可以將輸入的 in 變數轉為浮點數 (floating number)</p>
+<p>str(in) 可以將輸入的 in 變數轉為字串 (string)</p>
+<p><span style="color: #ff0000;">資料的基本運算</span></p>
+<p>資料包含 integer, floating number 與 string</p>
+<p>整數與浮點數可以進行加、減、乘與除運算.</p>
+<p>字串則可進行加與乘運算.</p>
+<p><span style="color: #ff0000;">函式定義與呼叫</span></p>
+<p>def 為 define 的縮寫, 在 Python 程式語法, 可以利用 def 定義函式.</p>
+<p><span style="color: #ff0000;">從 Gist 讀取資料</span></p>
+<p><span style="color: #ff0000;">數列應用</span></p>
+<p>List</p>
+<p><span style="color: #ff0000;">字典應用</span></p>
+<p>Dict</p>
+<p></p>
+<p></p><h1>CAD</h1>
+<p>常見的電腦輔助設計中階套件:</p>
+<p style="padding-left: 30px;">AutoDesk Inventor, Solidworks, Solid Edge</p>
+<p><span>常見的電腦輔助設計高階套件:</span></p>
+<p style="padding-left: 30px;"><span>PTC Creo, <span style="color: #ff0000;">Siemens NX</span>, Dassaults CATIA</span></p>
+<p><span>常見的雲端電腦輔助設計套件:</span></p>
+<p style="padding-left: 30px;"><span><span style="color: #ff0000;">Onshape</span>, AutoDesk Fusion 360</span></p>
+<p><span>開源電腦輔助設計套件:</span></p>
+<p style="padding-left: 30px;"><span style="color: #ff0000;">Solvespace</span></p>
+<p></p><h2>Solvespace</h2>
 <p>要在 Windows 64 位元操作系統中編譯 Solvespace 原始碼, 可以下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EeaLUTntsAZBjKrh-e_N_doBX6hV_CAakHv2A2g_Ft6MoA?e=ba2DGF">msys64_20210419_for_cad2022.7z</a> (3.4 GB 解開後 12.5 GB, 必須登入 @nfu OneDrive 帳號後才能下載).</p>
 <p>編譯 Solvespace 原始碼 v3.1 步驟如下:</p>
 <div>(一) 下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EfdRJOC38oNErVbz4uru1loBZvIfMs2f1W39SK6bPYtukA?e=NSkNhD" rel="noreferrer noopener" tabindex="-1" target="_blank" title="https://nfuedu.sharepoint.com/:u:/s/cad2022/efdrjoc38onervbz4uru1lobzvifms2f1w39sk6bpytuka?e=nsknhd">msys64_20210419 for cad2022.7z</a>.</div>
@@ -394,7 +467,8 @@ doc["aitetris"].bind("click", aitetris.do)
 </div>
 </div>
 </div><h2>NX</h2>
-<h2>Onshape</h2>
+<p>下載 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EclS-NMhqJ9JvCa-pIQ_jMsBQB1tipr_Zgc8kT8ha1kMtg?e=CWX91u">NX2027.3401_lite_cad2022.7z</a> (1.96 GB, 登入 @nfu OneDrive 帳號後才能下載)</p>
+<p><a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EZiAOTzHCPpPhyVJhKZ99l8BgPiNM90XN3-L2snCoMY6mQ?e=ZVSBgc">Drill Press 零組件檔案</a></p><h2>Onshape</h2>
 <h1>CoppeliaSim</h1>
 <p>CoppeliaSim 教育版 4.3.0 rev12 <a href="https://nfuedu.sharepoint.com/:u:/s/cad2022/EWdB5MhlZRJKjt5UiNRebR8BN6_AmU0IX1HC7Y6dnRBzQw">下載</a> (134 MB, 必須登入 @nfu OneDrive 帳號後才能下載).</p>
 <p>與 CoppeliaSim 配合使用的可攜程式系統:</p>
