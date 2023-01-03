@@ -510,9 +510,180 @@ ns = {'__name__':'__main__'}
 exec(data, ns)
 </script>
 <p><span style="color: #ff0000;">數列應用</span></p>
-<p>List</p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">nfu.cycu.org 是一台 Windows 主機, 安裝了 CPython + Flask 程式, 可以透過 AJAX 向教務主機取得與課程相關的資料. 例如: <a href="https://nfu.cycu.org/?semester=1111&amp;courseno=0747&amp;column=True">https://nfu.cycu.org/?semester=1111&amp;courseno=0747&amp;column=True</a> 可以取得 111 學年度第一學期課號為 0747 課程的修課學員學號, 且會在列出學號後跳行, 在網頁中以欄的方式由上往下排列學員學號.</span><br/></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">首先看 nfu.cycu.org 上的 CPython 程式碼:</span></span></p>
+<p><span style="color: #ff0000;"><span style="color: #000000;">wsgi.py</span></span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from flask import Flask, request 
+from flask_cors import CORS
+  
+import requests
+import bs4
+#import ssl
+  
+'''
+1a - 2b
+?semester=1111&amp;courseno=0747&amp;column=True 
+
+?semester=1111&amp;courseno=0761&amp;column=True 
+
+?semester=1111&amp;courseno=0773&amp;column=True 
+
+?semester=1111&amp;courseno=0786&amp;column=True 
+
+if xx.8 as nfu.cycu.xxx IPv4 address, no proxy needed
+'''
+proxies ={
+'http': 'http://kmolag:kmolab@[2001:288:6004:xx::x]:3128',
+'https': 'http://kmolab:kmolab@[2001:288:6004:xx::x]:3128'
+}
+
+app = Flask(__name__)
+CORS(app)
+  
+@app.route('/studlist')
+@app.route('/')
+def studlist():
+    semester = request.args.get('semester')
+    courseno = request.args.get('courseno')
+    column = request.args.get('column')
+
+    if semester == None:
+        semester = '1091'
+    if courseno == None:
+        courseno = '0762'
+    
+    headers = {'X-Requested-With': 'XMLHttpRequest'}
+
+    url = 'https://qry.nfu.edu.tw/studlist_ajax.php'
+    post_var = {'pselyr': semester, 'pseqno': courseno}
+  
+    #result = requests.post(url, data = post_var, headers = headers, proxies = proxies)
+    result = requests.post(url, data = post_var, headers = headers)
+    soup = bs4.BeautifulSoup(result.content, 'lxml')
+    table = soup.find('table', {'class': 'tbcls'})
+    data = []
+    rows = table.find_all('tr')
+    for row in rows:
+        cols = row.find_all('td')
+        cols = [ele.text.strip() for ele in cols]
+        data.append([ele for ele in cols if ele]) # Get rid of empty values
+    output = ""
+    for i in data[2:]:
+        #print(i[0])
+        if column == "True":
+            output +=i[0] + "&lt;/br&gt;"
+        else:
+            output +=i[0] + "\n"
+        
+    return output
+    #return  str(pselyr) + " + " +str(pseqno)
+  
+# 即使在近端仍希望以 https 模式下執行
+#context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+#context.load_cert_chain('localhost.crt', 'localhost.key')
+  
+if __name__ == '__main__':
+    app.run(host='127.0.0.1', port=8080, debug=True)</pre>
+<p>而 wsgi.py 是透過 waitress_server.py 啟動:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># pip install waitress
+from waitress import serve
+
+# under cmsimde import fossilapp
+import wsgi
+
+# run cmsimde dynamic site with production waitress
+serve(wsgi.app, host='0.0.0.0', port=5005, url_scheme='https')</pre>
+<p>意即, 最終 wsgi.py 在從 waitress_server.py 導入後, 以近端的 5005 port 啟動. 最後的 https 則交由 stunnel 接手:</p>
+<p>stunnel.conf</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">[https]
+accept = nfu.cycu.org:443
+connect = 5005
+cert = fullchain.pem
+key = privkey.pem
+TIMEOUTclose = 0</pre>
+<p>之後若利用 Brython 的 open() 與 read() 讀取 <a href="https://nfu.cycu.org/?semester=1111&amp;courseno=0747&amp;column=True">1a 2022 Fall cp 修課學員學號</a>, 並利用每一行最後的跳行符號進行分割, 就可以將各學員的學號放入數列 (List), 再利用 for 迴圈就可以逐一取出學員學號進行運用.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 已知 cp2022 1a 修課學員學號, 可以輾轉從下列 url 取出
+url = "https://nfu.cycu.org/?semester=1111&amp;courseno=0747&amp;column=True"
+data = open(url).read()
+# 上列 data 為學員學號分別以跳行符號各自列成一列
+# 以下利用跳行符號對 data 進行分割, 可以得到型別為 list 的 data 豎列
+data = data.split("\n")
+# 但取回的資料最後一筆為空白行, 因此數列最後一個元素必須去除
+# 冒號前面沒有索引值, 表示從數列的第一個元素開始取用
+# 冒號後面加上 -1, 表示數列的取值, 只取到倒數第一位的前一個元素, 也就可以去除最後一個空白元素
+data = data[:-1]
+print(data)</pre>
+<p>上述數列應用的程式執行結果:</p>
+<div id="list_ex1"></div>
+<script type="text/python">
+from browser import document, html
+# 已知 cp2022 1a 修課學員學號, 可以輾轉從下列 url 取出
+url = "https://nfu.cycu.org/?semester=1111&amp;courseno=0747&amp;column=True"
+data = open(url).read()
+# 上列 data 為學員學號分別以跳行符號各自列成一列
+# 以下利用跳行符號對 data 進行分割, 可以得到型別為 list 的 data 豎列
+data = data.split("\n")
+# 但取回的資料最後一筆為空白行, 因此數列最後一個元素必須去除
+# 冒號前面沒有索引值, 表示從數列的第一個元素開始取用
+# 冒號後面加上 -1, 表示數列的取值, 只取到倒數第一位的前一個元素, 也就可以去除最後一個空白元素
+data = data[:-1]
+#print(data)
+output = "["
+count = 0
+for i in data:
+    count = count + 1
+    if count == 1:
+        output = output + str(i)
+    else:
+        output = output + ", " + str(i)
+list_ex1_pos = document["list_ex1"]
+list_ex1_pos <= output + "]"
+list_ex1_pos <= html.BR()
+</script>
 <p><span style="color: #ff0000;">字典應用</span></p>
-<p>Dict</p>
+<p>從 <a href="https://mde.tw/studlist/2022fall/1a.txt">https://mde.tw/studlist/2022fall/1a.txt</a> 可以取得 1a 各學員所提供的 Github 對應帳號, 利用 Brython 程式讀取後, 可以利用 Dictionary 資料型別, 將學員的學號與對應 Github 帳號放入 github_account 字典中, 之後只要透過學號當作索引, 就可以列出該學員的 Github 帳號.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">stud_1a_url = "https://mde.tw/studlist/2022fall/1a.txt"
+data = open(stud_1a_url).read()
+# 因為資料中的第一個欄位為學號, 而第二個欄位為 Github 帳號, 且各列資料以 \t 隔開, 因此讀取後先以各列的跳行符號分割, 將各學員的資料先放入數列後再逐一取出分割出學號與 Github 帳號對應值
+# 先宣告一個空的字典
+num_github = {}
+data = data.split("\n")
+# 因為第一列資料為標題, 必須利用 data[1:] 表示從索引值第二位開始取用
+# 而且最後一筆為空資料, 也必須去除, 因此最後只取用 data[1:-1]
+for i in data[1:-1]:
+    each_stud = i.split("\t")
+    stud_num = each_stud[0]
+    github = each_stud[1]
+    # 逐一以學號作為字典索引, 對應至各學員的 Github 帳號
+    num_github[stud_num] = github
+
+# 試著利用字典列出 41123110 的 Github 帳號
+print(num_github["41123110"])
+</pre>
+<p>上列字典應用程式執行結果:</p>
+<div id="dict_ex1"></div>
+<script type="text/python">
+from browser import document, html
+stud_1a_url = "https://mde.tw/studlist/2022fall/1a.txt"
+data = open(stud_1a_url).read()
+# 因為資料中的第一個欄位為學號, 而第二個欄位為 Github 帳號, 且各列資料以 \t 隔開, 因此讀取後先以各列的跳行符號分割, 將各學員的資料先放入數列後再逐一取出分割出學號與 Github 帳號對應值
+# 先宣告一個空的字典
+num_github = {}
+data = data.split("\n")
+# 因為第一列資料為標題, 必須利用 data[1:] 表示從索引值第二位開始取用
+# 而且最後一筆為空資料, 也必須去除, 因此最後只取用 data[1:-1]
+for i in data[1:-1]:
+    each_stud = i.split("\t")
+    stud_num = each_stud[0]
+    github = each_stud[1]
+    # 逐一以學號作為字典索引, 對應至各學員的 Github 帳號
+    num_github[stud_num] = github
+
+# 試著利用字典列出 41123110 的 Github 帳號
+dict_ex1_pos = document["dict_ex1"]
+dict_ex1_pos <= str(num_github["41123110"])
+dict_ex1_pos <= html.BR()
+</script>
 <p><span style="color: #ff0000;">Brython 的 Canvas 靜態繪圖</span></p>
 <p><span style="color: #ff0000;">Brython 的 Canvas 動態繪圖</span></p>
 <p></p>
