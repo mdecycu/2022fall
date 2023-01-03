@@ -681,14 +681,154 @@ for i in data[1:-1]:
 
 # 試著利用字典列出 41123110 的 Github 帳號
 dict_ex1_pos = document["dict_ex1"]
-dict_ex1_pos <= str(num_github["41123110"]))
+dict_ex1_pos <= str(num_github["41123110"])
 dict_ex1_pos <= html.BR()
 </script>
 <p><span style="color: #ff0000;">Brython 的 Canvas 靜態繪圖</span></p>
-<p><span style="color: #ff0000;">Brython 的 Canvas 動態繪圖</span></p>
-<p></p>
-<p></p>
-<p></p><h1>CAD</h1>
+<p>以下為利用 HTML5 Canvas 靜態繪圖範例:</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">from browser import document, html
+# 利用 math 函式庫執行三角函數運算
+import math
+canvas = html.CANVAS(width = 300, height = 300)
+#canvas.id = "star"
+# 準備繪圖畫布
+star_ex1_pos = document["star_ex1"]
+star_ex1_pos &lt;= canvas
+ctx = canvas.getContext("2d")
+
+# 建立畫直線函式
+def draw_line(x1, y1, x2, y2, color="#ff0000"):
+    ctx.beginPath()
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.strokeStyle = color
+    ctx.stroke()
+    
+deg = math.pi/180.
+
+# 建立五星繪圖函式
+#x, y 為中心, r 為半徑, angle 旋轉角, solid 空心或實心, color 顏色
+def star(x, y, r, angle=0, solid=False, color="#ff0000"):
+    #以 x, y 為圓心, 計算五個外點
+    # 圓心到水平線距離
+    a = r*math.cos(72*deg)
+    # a 頂點向右到內點距離
+    b = (r*math.cos(72*deg)/math.cos(36*deg))*math.sin(36*deg)
+    # 利用畢氏定理求內點半徑
+    rin = math.sqrt(a*a + b*b)
+    # 查驗 a, b 與 rin
+    #print(a, b, rin)
+    if solid:
+        ctx.beginPath()
+    # angle 角度先轉 360/10, 讓五星對正
+    angle = angle + 360/10
+    for i in range(5):
+        xout = (x + r*math.sin((360/5)*deg*i+angle*deg))
+        yout = (y + r*math.cos((360/5)*deg*i+angle*deg))
+        # 外點增量 + 1
+        xout2 = x + r*math.sin((360/5)*deg*(i+1)+angle*deg)
+        yout2 = y + r*math.cos((360/5)*deg*(i+1)+angle*deg)
+        xin = x + rin*math.sin((360/5)*deg*i+36*deg+angle*deg)
+        yin = y + rin*math.cos((360/5)*deg*i+36*deg+angle*deg)
+        # 查驗外點與內點座標
+        #print(xout, yout, xin, yin)
+        if solid:
+            # 填色
+            if i==0:
+                ctx.moveTo(xout, yout)
+                ctx.lineTo(xin, yin)
+                ctx.lineTo(xout2, yout2)
+            else:
+                ctx.lineTo(xin, yin)
+                ctx.lineTo(xout2, yout2)
+        else:
+            # 空心
+            draw_line(xout, yout, xin, yin, color)
+            # 畫空心五芒星, 無關畫線次序, 若實心則與畫線次序有關
+            draw_line(xout2, yout2, xin, yin, color)
+    if solid:
+        ctx.fillStyle = color
+        ctx.fill()
+
+# 大五星位於 (5x20, 5x20) 半徑為 3x20
+# 利用 gold 顏色繪製塗色五星圖案
+star(100, 100, 60, solid=True, color="#ffd700")
+# 利用紅色描繪五星外圍線條
+star(100, 100, 60, solid=False, color="#ff0000")</pre>
+<p>上列五星靜態繪圖結果:</p>
+<div id="star_ex1"></div>
+<script type="text/python">
+from browser import document, html
+# 利用 math 函式庫執行三角函數運算
+import math
+canvas = html.CANVAS(width = 300, height = 300)
+#canvas.id = "star"
+# 準備繪圖畫布
+star_ex1_pos = document["star_ex1"]
+star_ex1_pos <= canvas
+ctx = canvas.getContext("2d")
+
+# 建立畫直線函式
+def draw_line(x1, y1, x2, y2, color="#ff0000"):
+    ctx.beginPath()
+    ctx.moveTo(x1, y1)
+    ctx.lineTo(x2, y2)
+    ctx.strokeStyle = color
+    ctx.stroke()
+    
+deg = math.pi/180.
+
+# 建立五星繪圖函式
+#x, y 為中心, r 為半徑, angle 旋轉角, solid 空心或實心, color 顏色
+def star(x, y, r, angle=0, solid=False, color="#ff0000"):
+    #以 x, y 為圓心, 計算五個外點
+    # 圓心到水平線距離
+    a = r*math.cos(72*deg)
+    # a 頂點向右到內點距離
+    b = (r*math.cos(72*deg)/math.cos(36*deg))*math.sin(36*deg)
+    # 利用畢氏定理求內點半徑
+    rin = math.sqrt(a*a + b*b)
+    # 查驗 a, b 與 rin
+    #print(a, b, rin)
+    if solid:
+        ctx.beginPath()
+    # angle 角度先轉 360/10, 讓五星對正
+    angle = angle + 360/10
+    for i in range(5):
+        xout = (x + r*math.sin((360/5)*deg*i+angle*deg))
+        yout = (y + r*math.cos((360/5)*deg*i+angle*deg))
+        # 外點增量 + 1
+        xout2 = x + r*math.sin((360/5)*deg*(i+1)+angle*deg)
+        yout2 = y + r*math.cos((360/5)*deg*(i+1)+angle*deg)
+        xin = x + rin*math.sin((360/5)*deg*i+36*deg+angle*deg)
+        yin = y + rin*math.cos((360/5)*deg*i+36*deg+angle*deg)
+        # 查驗外點與內點座標
+        #print(xout, yout, xin, yin)
+        if solid:
+            # 填色
+            if i==0:
+                ctx.moveTo(xout, yout)
+                ctx.lineTo(xin, yin)
+                ctx.lineTo(xout2, yout2)
+            else:
+                ctx.lineTo(xin, yin)
+                ctx.lineTo(xout2, yout2)
+        else:
+            # 空心
+            draw_line(xout, yout, xin, yin, color)
+            # 畫空心五芒星, 無關畫線次序, 若實心則與畫線次序有關
+            draw_line(xout2, yout2, xin, yin, color)
+    if solid:
+        ctx.fillStyle = color
+        ctx.fill()
+
+# 大五星位於 (5x20, 5x20) 半徑為 3x20
+# 利用 gold 顏色繪製塗色五星圖案
+star(100, 100, 60, solid=True, color="#ffd700")
+# 利用紅色描繪五星外圍線條
+star(100, 100, 60, solid=False, color="#ff0000")
+</script>
+<p><span style="color: #ff0000;">Brython 的 Canvas 動態繪圖</span></p><h1>CAD</h1>
 <p>常見的電腦輔助設計中階套件:</p>
 <p style="padding-left: 30px;">AutoDesk Inventor, Solidworks, Solid Edge</p>
 <p><span>常見的電腦輔助設計高階套件:</span></p>
