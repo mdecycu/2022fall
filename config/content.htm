@@ -465,6 +465,49 @@ add_to_9_pos = document["add_to_9"]
 add_to_9_pos <= "從 1 累加到 9 總數值為: " + str(sum)
 add_to_9_pos <= html.BR()
 </script>
+<p><span style="color: #000000;">從 1 累加到 100 但是避開數字有 3 的整數:</span></p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 以下可以利用 for 重複迴圈進行整數累加
+# 先設定累加總和變數為 sum
+# 一開始尚未進行整數累加, sum 的對應值為 0
+sum = 0
+end = 100
+check = 0
+# 接著利用 for 迴圈以特定增量值產生希望進入累加的整數
+for i in range(1, end + 1):
+    # 若數字中有 3, 則 pass 表示不進行累加
+    if "3" in str(i):
+        check = check + i
+        print(i, end=", ")
+    else:
+        sum = sum + i
+print("\n從 1 累加到 " + str(end) + " 除了數字中有 3 者, 其總數值為: " + str(sum))
+print(sum + check)</pre>
+<p>以上整數累加但避開帶有特定數字的整數運算結果:</p>
+<div id="add_but_ex1"></div>
+<script type="text/python">
+from browser import html, document
+add_but_ex1_pos = document["add_but_ex1"]
+# 以下可以利用 for 重複迴圈進行整數累加
+# 先設定累加總和變數為 sum
+# 一開始尚未進行整數累加, sum 的對應值為 0
+sum = 0
+end = 100
+check = 0
+
+# 接著利用 for 迴圈以特定增量值產生希望進入累加的整數
+for i in range(1, end + 1):
+    # 若數字中有 3, 則 pass 表示不進行累加
+    if "3" in str(i):
+        check = check + i
+        add_but_ex1_pos <= str(i) + ", "
+    else:
+        sum = sum + i
+
+add_but_ex1_pos <= html.BR()
+add_but_ex1_pos <= "從 1 累加到 " + str(end) + " 除了數字中有 3 者, 其總數值為: " + str(sum)
+add_but_ex1_pos <= html.BR()
+add_but_ex1_pos <= str(sum + check)
+</script>
 <p><span style="color: #ff0000;">函式定義與呼叫</span></p>
 <p>def 為 define 的縮寫, 在 Python 程式語法, 可以利用 def 定義函式.</p>
 <pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 將累加程式寫為函式, start 輸入變數為累加起始整數, 然後增量 1 累加至 end 整數
@@ -476,6 +519,44 @@ def int_add(start, end):
 
 int_add(1, 9)</pre>
 <p>上列累加函式定義與呼叫執行結果為:</p>
+<div id="add_ex2"></div>
+<script type="text/python">
+from browser import html, document
+add_ex2_pos = document["add_ex2"]
+# 將累加程式寫為函式, start 輸入變數為累加起始整數, 然後增量 1 累加至 end 整數
+def int_add(start, end):
+    sum = 0
+    for i in range(start, end+1):
+        sum = sum + i
+    return "從 " + str(start) + " 累加到 " + str(end) + " 總數值為: " + str(sum)
+
+add_ex2_pos <= int_add(1, 9)
+</script>
+<p><span style="color: #ff0000;">函式定義與呼叫</span></p>
+<p>def 為 define 的縮寫, 在 Python 程式語法, 可以利用 def 定義函式.</p>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 將累加程式寫為函式, start 輸入變數為累加起始整數, 然後增量 1 累加至 end 整數
+def int_add(start, end):
+    sum = 0
+    for i in range(start, end+1):
+        sum = sum + i
+    return "從 " + str(start) + " 累加到 " + str(end) + " 總數值為: " + str(sum)
+
+int_add(1, 9)</pre>
+<p>上列累加函式定義與呼叫執行結果為:</p>
+<div id="add_to"></div>
+<script type="text/python">
+from browser import document, html
+# 將累加程式寫為函式, start 輸入變數為累加起始整數, 然後增量 1 累加至 end 整數
+def int_add(start, end):
+    sum = 0
+    for i in range(start, end+1):
+        sum = sum + i
+    return "從 " + str(start) + " 累加到 " + str(end) + " 總數值為: " + str(sum)
+
+add_to_pos = document["add_to"]
+add_to_pos <= int_add(1, 9)
+add_to_pos <= html.BR()
+</script>
 <div id="add_to"></div>
 <script type="text/python">
 from browser import document, html
